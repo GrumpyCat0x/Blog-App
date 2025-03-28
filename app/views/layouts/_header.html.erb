@@ -1,0 +1,45 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <%= link_to "BlogApp", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Posts", posts_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "Categories", categories_path, class: "nav-link" %></li>
+          <% if logged_in? %>
+            <li class="nav-item"><%= link_to "Users", users_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav">
+          <% if logged_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-user-circle me-1"></i><%= current_user.username %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><%= link_to "<i class='fas fa-user me-2'></i>Profile".html_safe, user_path(current_user), class: "dropdown-item" %></li>
+                <li><%= link_to "<i class='fas fa-user-edit me-2'></i>Edit Profile".html_safe, user_profile_path(current_user), class: "dropdown-item" %></li>
+                <li><%= link_to "<i class='fas fa-pen-to-square me-2'></i>New Post".html_safe, new_post_path, class: "dropdown-item" %></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <%= button_to logout_path, method: :delete, class: "dropdown-item border-0 bg-transparent w-100 text-start" do %>
+                    <i class='fas fa-sign-out-alt me-2'></i>Log out
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item"><%= link_to "<i class='fas fa-user-plus me-1'></i> Sign up".html_safe, signup_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "<i class='fas fa-sign-in-alt me-1'></i> Log in".html_safe, login_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

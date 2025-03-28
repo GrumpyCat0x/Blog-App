@@ -1,0 +1,22 @@
+<div class="card mb-4">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title m-0"><%= link_to post.title, post_path(post) %></h5>
+    <small class="text-muted">
+      <% if post.categories.any? %>
+        Categories: <%= post.category_names %>
+      <% end %>
+    </small>
+  </div>
+
+  <div class="card-body">
+    <p class="card-text"><%= truncate(post.content, length: 200) %></p>
+  </div>
+
+  <div class="card-footer text-muted d-flex justify-content-between">
+    <span>
+      By <%= link_to post.user.username, user_path(post.user) %>
+      <%= time_ago_in_words(post.created_at) %> ago
+    </span>
+    <span><%= pluralize(post.comments.count, "comment") %></span>
+  </div>
+</div>

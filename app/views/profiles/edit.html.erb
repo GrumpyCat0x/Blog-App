@@ -1,0 +1,38 @@
+<div class="card shadow-sm border-0">
+  <div class="card-header bg-white">
+    <h1 class="h4 mb-0">Edit Profile</h1>
+  </div>
+  <div class="card-body">
+    <%= form_with(model: [@user, @profile], local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <%= f.text_field :first_name, class: 'form-control', id: 'firstName' %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <%= f.text_field :last_name, class: 'form-control', id: 'lastName' %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="dateOfBirth" class="form-label">Date of Birth</label>
+        <%= f.date_field :date_of_birth, class: 'form-control', id: 'dateOfBirth' %>
+        <div class="form-text">This information will be displayed on your profile.</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="bio" class="form-label">Bio</label>
+        <%= f.text_area :bio, rows: 5, class: 'form-control', id: 'bio', placeholder: 'Tell us a bit about yourself...' %>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <%= f.submit "Update Profile", class: "btn btn-primary" %>
+        <%= link_to "Cancel", user_profile_path(@user), class: "btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

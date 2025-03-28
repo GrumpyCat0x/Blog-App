@@ -1,0 +1,38 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: 10, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label>Categories</label>
+    <div class="row">
+      <% @categories.each do |category| %>
+        <div class="col-md-4">
+          <div class="form-check">
+            <%= check_box_tag "category_ids[]", category.id,
+                              @post.categories.include?(category), id: "category_#{category.id}", class: "form-check-input" %>
+            <%= label_tag "category_#{category.id}", category.name, class: "form-check-label" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group form-check">
+    <%= f.check_box :published, class: 'form-check-input' %>
+    <%= f.label :published, class: 'form-check-label' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", @post.new_record? ? posts_path : post_path(@post), class: "btn btn-secondary" %>
+  </div>
+<% end %>

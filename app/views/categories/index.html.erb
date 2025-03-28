@@ -1,0 +1,72 @@
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">Categories</h1>
+  <% if current_user&.admin? %>
+    <%= link_to new_category_path, class: "btn btn-primary" do %>
+      <i class="fas fa-plus-circle me-2"></i>New Category
+    <% end %>
+  <% end %>
+</div>
+
+<% if @categories.any? %>
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card category-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="category-icon mb-3">
+              <% icon = case category.name.downcase
+                        when 'technology' then 'laptop-code'
+                        when 'travel' then 'plane-departure'
+                        when 'food' then 'utensils'
+                        when 'lifestyle' then 'leaf'
+                        when 'health' then 'heartbeat'
+                        when 'business' then 'briefcase'
+                        when 'entertainment' then 'film'
+                        when 'education' then 'graduation-cap'
+                        when 'sports' then 'running'
+                        when 'politics' then 'landmark'
+                        else 'tag' end %>
+              <i class="fas fa-<%= icon %> fa-2x text-primary"></i>
+            </div>
+            <h2 class="card-title h5 mb-2">
+              <%= link_to category.name, category_path(category), class: "text-decoration-none stretched-link" %>
+            </h2>
+            <p class="card-text text-muted small mb-3">
+              <% if category.description.present? %>
+                <%= truncate(category.description, length: 100) %>
+              <% else %>
+                <span class="fst-italic">No description provided.</span>
+              <% end %>
+            </p>
+            <div class="post-count">
+              <span class="badge bg-light text-dark">
+                <i class="fas fa-file-alt me-1"></i> <%= pluralize(category.posts.count, "post") %>
+              </span>
+            </div>
+          </div>
+          <% if current_user&.admin? %>
+            <div class="card-footer bg-transparent border-top-0 pt-0">
+              <div class="d-flex admin-actions">
+                <%= link_to edit_category_path(category), class: "btn btn-sm btn-outline-secondary me-2" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= link_to category_path(category), method: :delete, data: { confirm: "Are you sure? This will remove the category from all posts." }, class: "btn btn-sm btn-outline-danger" do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center p-5 bg-light rounded">
+    <i class="fas fa-tags fa-3x text-muted mb-3"></i>
+    <h3>No categories available.</h3>
+    <p class="text-muted">Categories help organize posts by topic.</p>
+    <% if current_user&.admin? %>
+      <%= link_to "Create Category", new_category_path, class: "btn btn-primary mt-2" %>
+    <% end %>
+  </div>
+<% end %>

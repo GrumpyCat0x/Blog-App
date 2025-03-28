@@ -1,0 +1,12 @@
+<% if object.errors.any? %>
+  <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+    <h5 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i><%= pluralize(object.errors.count, "error") %> prohibited this <%= object.class.name.downcase %> from being saved:</h5>
+    <hr>
+    <ul class="mb-0">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% end %>

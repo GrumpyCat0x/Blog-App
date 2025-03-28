@@ -1,0 +1,7 @@
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type == 'notice' ? 'info' : (message_type == 'success' ? 'success' : (message_type == 'danger' ? 'danger' : 'warning')) %> alert-dismissible fade show shadow-sm">
+    <i class="fas <%= message_type == 'success' ? 'fa-check-circle' : (message_type == 'danger' ? 'fa-exclamation-circle' : 'fa-info-circle') %> me-2"></i>
+    <%= message %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% end %>
