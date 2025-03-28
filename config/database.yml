@@ -1,15 +1,24 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: blog_app_development
+  username: postgres  # 替换为你的PostgreSQL用户名
+  password: password  # 替换为你的PostgreSQL密码
+  host: localhost
+  port: 5432
 
 test:
   <<: *default
   database: blog_app_test
+  username: postgres  # 替换为你的PostgreSQL用户名
+  password: password  # 替换为你的PostgreSQL密码
+  host: localhost
+  port: 5432
 
 production:
   <<: *default
