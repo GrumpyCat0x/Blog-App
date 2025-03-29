@@ -3,18 +3,22 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+
+development:
+  <<: *default
+  database: blog_app_development
   host: localhost
   port: 5432
   username: postgres
   password: password
 
-development:
-  <<: *default
-  database: blog_app_development
-
 test:
   <<: *default
   database: blog_app_test
+  host: localhost
+  port: 5432
+  username: postgres
+  password: password
 
 production:
   <<: *default
