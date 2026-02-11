@@ -1,5 +1,5 @@
 McMaster University | SEP 759:Prototyping Web Applications | Final Project
-![McMaster University](public/robots.txtmcmaster.jpg)
+![McMaster University](public/mcmaster.jpg)
 # Blog App
 
 This is a Ruby on Rails blog application that allows users to create, read, update, and delete blog posts. It is structured as a standard Rails app and includes automated checks for code quality, security, and tests via GitHub Actions.
