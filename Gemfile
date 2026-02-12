@@ -35,7 +35,7 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 
 # For will_paginate
-gem 'will_paginate', '~> 3.3'
+gem 'will_paginate', '~> 4.0'
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
